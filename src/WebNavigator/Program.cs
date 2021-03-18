@@ -1,12 +1,29 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
+using System.Threading.Tasks;
 
 namespace WebNavigator
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Package Device started");
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+#if DEBUG
+                .AddUserSecrets<Program>()
+#endif
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            var configuration = builder.Build();
+
+            var navigateUri = configuration.GetValue<string>("navigateUri");
+
+            var navigator = new Navigator();
+            await navigator.NavigateAsync(navigateUri);
         }
     }
 }

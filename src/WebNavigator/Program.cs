@@ -8,7 +8,7 @@ namespace WebNavigator
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("Package Device started");
+            Console.WriteLine("Web Navigator started");
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(AppContext.BaseDirectory)

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WebNavigator": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

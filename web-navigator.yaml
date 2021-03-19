@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-navigator
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: web-navigator
+  template:
+    metadata:
+      labels:
+        app: web-navigator
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - image: jannemattila/web-navigator:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 50m
+            memory: 50Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        env:
+          - name: navigateUri
+            value: "https://echo.jannemattila.com/"

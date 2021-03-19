@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{7E9AF29F-12C
 		.gitignore = .gitignore
 		azure-pipelines.yml = azure-pipelines.yml
 		README.md = README.md
+		web-navigator.yaml = web-navigator.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4EF08C94-B952-4183-8D20-7036E5FD2661}"
@@ -20,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{02227113-F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "release", "release", "{D572B1A0-5190-4021-9126-32076F2D07F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebNavigator", "src\WebNavigator\WebNavigator.csproj", "{645E5F28-3A87-4628-A912-A0879D968E9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebNavigator", "src\WebNavigator\WebNavigator.csproj", "{645E5F28-3A87-4628-A912-A0879D968E9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

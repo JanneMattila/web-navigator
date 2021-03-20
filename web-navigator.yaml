@@ -26,4 +26,4 @@ spec:
             memory: 100Mi
         env:
           - name: navigateUri
-            value: "https://echo.jannemattila.com/"
+            value: "http://localhost:3000"

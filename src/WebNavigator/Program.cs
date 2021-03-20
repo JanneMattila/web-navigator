@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
+using OpenTelemetry;
+using OpenTelemetry.Trace;
 using System;
 using System.Threading.Tasks;
 
@@ -9,6 +11,10 @@ namespace WebNavigator
         static async Task Main(string[] args)
         {
             Console.WriteLine("Web Navigator started");
+            using var openTelemetry = Sdk.CreateTracerProviderBuilder()
+                .AddSource("WebNavigator")
+                .AddConsoleExporter()
+                .Build();
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(AppContext.BaseDirectory)

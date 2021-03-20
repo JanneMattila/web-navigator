@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
@@ -9,6 +10,7 @@ namespace WebNavigator
 {
     public class Navigator
     {
+        private readonly ActivitySource _source = new("Navigator");
         private readonly HttpClient _client = new();
         private readonly Random _random = new();
         private readonly Regex _regEx = new(@"href\s*=\s*(?:[""'](?<1>[^""']*)[""']|(?<1>\S+))", RegexOptions.IgnoreCase | RegexOptions.Compiled, TimeSpan.FromSeconds(15));
@@ -17,6 +19,7 @@ namespace WebNavigator
 
         public async Task NavigateAsync(string navigateUri)
         {
+            using var activity = _source.StartActivity("NavigateAsync");
             var uri = new Uri(navigateUri);
             var hostname = uri.Host;
 

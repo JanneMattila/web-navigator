@@ -55,7 +55,7 @@ sudo az aks install-cli
 az aks get-credentials --name $aks --resource-group $resourceGroup
 
 # Fetch yaml which contains deployment for web navigator
-wget https://raw.githubusercontent.com/JanneMattila/web-navigator/main/web-navigator.yaml -o web-navigator.yaml
+wget https://raw.githubusercontent.com/JanneMattila/web-navigator/main/web-navigator.yaml
 
 # EDIT "replicas" to match the expected count.
 # EDIT "navigateUri" to match target url.

@@ -16,6 +16,7 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
       - image: jannemattila/web-navigator:latest
+        name: web-navigator
         imagePullPolicy: Always
         resources:
           requests:

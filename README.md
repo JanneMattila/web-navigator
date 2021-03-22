@@ -46,7 +46,7 @@ az account set --subscription <YourSubscriptionName>
 az group create --name $resourceGroup --location $location
 
 # Create new AKS
-az aks create --name $aks --resource-group $resourceGroup --node-count 1
+az aks create --name $aks --resource-group $resourceGroup --node-count 1 --enable-cluster-autoscaler --min-count 1 --max-count 5
 
 # Install kubectl
 sudo az aks install-cli
@@ -62,6 +62,12 @@ wget https://raw.githubusercontent.com/JanneMattila/web-navigator/main/web-navig
 
 # Deploy web navigator
 kubectl apply -f web-navigator.yaml
+
+# Further update deployment scale
+kubectl scale deployment web-navigator --replicas=100
+
+# Monitor pod scaling progress
+kubectl get deployment web-navigator -w
 
 # Wipe out the resources
 az group delete --name $resourceGroup -y

@@ -8,7 +8,8 @@
 
 ## Introduction
 
-Web Navigator is simple craw
+Web Navigator is simple crawler that can be used for simulating random
+end user navigation in your site.
 
 ## Working with 'Web Navigator'
 

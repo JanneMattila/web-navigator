@@ -22,4 +22,5 @@ stages:
         buildContext:
         tags: |
           $(Build.BuildNumber)
-          latest    
+          latest
+

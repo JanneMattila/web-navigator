@@ -7,7 +7,7 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0-azurelinux3.0 AS build
 WORKDIR /src/WebNavigator
 COPY src/WebNavigator/WebNavigator.csproj .
 RUN dotnet restore WebNavigator.csproj
-COPY . .
+COPY src/WebNavigator/ .
 RUN dotnet build "WebNavigator.csproj" -c Release -o /app/build
 
 FROM build AS publish

@@ -7,7 +7,7 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0-azurelinux3.0 AS build
 WORKDIR /src/WebNavigatorStatistics
 COPY src/WebNavigatorStatistics/WebNavigatorStatistics.csproj .
 RUN dotnet restore WebNavigatorStatistics.csproj
-COPY . .
+COPY src/WebNavigatorStatistics/ .
 RUN dotnet build "WebNavigatorStatistics.csproj" -c Release -o /app/build
 
 FROM build AS publish

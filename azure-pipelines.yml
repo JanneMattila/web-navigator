@@ -1,5 +1,6 @@
 variables:
-  repository: 'jannemattila/web-navigator'
+  repositoryWebNavigator: 'jannemattila/web-navigator'
+  repositoryWebNavigatorStats: 'jannemattila/web-navigator-stats'
 
 trigger:
 - main
@@ -16,9 +17,19 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'DockerHub'
-        repository: $(repository)
+        repository: $(repositoryWebNavigator)
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: "src/WebNavigator/Dockerfile"
+        buildContext:
+        tags: |
+          $(Build.BuildNumber)
+          latest
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHub'
+        repository: $(repositoryWebNavigatorStats)
+        command: 'buildAndPush'
+        Dockerfile: "src/WebNavigatorStatistics/Dockerfile"
         buildContext:
         tags: |
           $(Build.BuildNumber)

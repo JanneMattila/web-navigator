@@ -1,7 +1,13 @@
 {
   "profiles": {
     "WebNavigator": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "environmentVariables": {
+        "navigateUri": "",
+        "reportUri": "https://localhost:7121/api/serverstatistics",
+        "reportInterval": "5",
+        "reportLocation": "Finland"
+      }
     },
     "Docker": {
       "commandName": "Docker"

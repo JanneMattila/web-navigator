@@ -1,0 +1,32 @@
+﻿<h2>WebNavigator Statistics</h2>
+
+<h3 id="stats">
+
+</h3>
+<table id="statsTable" border="1" style="margin: 10px">
+    <thead>
+        <tr>
+            <th>Location</th>
+            <th>Machine</th>
+            <th>Time</th>
+            <th>StatusCode2XX</th>
+            <th>StatusCode3XX</th>
+            <th>StatusCode4XX</th>
+            <th>StatusCode5XX</th>
+            <th>Last Updated</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section Scripts
+{
+    <environment include="Development">
+        <script src="~/lib/signalr/signalr.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/signalr/signalr.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+}

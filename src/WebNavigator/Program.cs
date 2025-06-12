@@ -27,8 +27,11 @@ class Program
         var configuration = builder.Build();
 
         var navigateUri = configuration.GetValue<string>("navigateUri");
+        var reportUri = configuration.GetValue<string>("reportUri", string.Empty);
+        var reportInterval = configuration.GetValue<int>("reportInterval", -1);
+        var reportLocation = configuration.GetValue<string>("reportLocation", string.Empty);
 
-        var navigator = new Navigator();
+        var navigator = new Navigator(reportUri, reportInterval, reportLocation);
         await navigator.NavigateAsync(navigateUri);
     }
 }

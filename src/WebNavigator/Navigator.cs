@@ -29,6 +29,7 @@ public class Navigator
     private readonly Regex _regEx = new(@"href\s*=\s*(?:[""'](?<1>[^""']*)[""']|(?<1>\S+))", RegexOptions.IgnoreCase | RegexOptions.Compiled, TimeSpan.FromSeconds(15));
     private readonly HashSet<Uri> _visited = [];
     private readonly HashSet<Uri> _queue = [];
+    private readonly HashSet<Uri> _ignore = [];
 
     public Navigator(string reportUri, int reportInterval, string reportLocation)
     {
@@ -87,6 +88,12 @@ public class Navigator
                 if (ex is HttpRequestException httpEx && httpEx.StatusCode.HasValue)
                 {
                     statusCode = (int)httpEx.StatusCode.Value;
+                    if (statusCode == 404)
+                    {
+                        // Ignore this URI for future requests
+                        _ignore.Add(uri); 
+                        _visited.Remove(uri);
+                    }
                 }
                 else
                 {
@@ -122,6 +129,13 @@ public class Navigator
                 }
             }
 
+            if (string.IsNullOrEmpty(html) || statusCode >= 400)
+            {
+                // If we got an error or no content, we won't follow links
+                uri = GetNextUri();
+                continue;
+            }
+
             var matches = _regEx.Matches(html);
             for (int i = 0; i < matches.Count; i++)
             {
@@ -132,6 +146,7 @@ public class Navigator
                     if (newUri.Host != hostname) continue;
                     if (_visited.Contains(newUri)) continue;
                     if (_queue.Contains(newUri)) continue;
+                    if (_ignore.Contains(newUri)) continue;
 
                     _queue.Add(newUri);
                 }

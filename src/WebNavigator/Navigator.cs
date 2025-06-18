@@ -30,13 +30,15 @@ public class Navigator
     private readonly HashSet<Uri> _visited = [];
     private readonly HashSet<Uri> _queue = [];
     private readonly HashSet<Uri> _ignore = [];
+    private readonly string _myipUri;
 
-    public Navigator(string reportUri, int reportInterval, string reportLocation)
+    public Navigator(string reportUri, int reportInterval, string reportLocation, string myipUri)
     {
         _reportUri = reportUri;
         _reportInterval = reportInterval;
         _reportingEnabled = !string.IsNullOrEmpty(reportUri) && reportInterval > 0;
         _statistics.Location = reportLocation;
+        _myipUri = myipUri;
 
         _client.DefaultRequestHeaders.UserAgent.ParseAdd(
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0"
@@ -46,6 +48,21 @@ public class Navigator
     public async Task NavigateAsync(string navigateUri)
     {
         using var activity = _source.StartActivity("NavigateAsync");
+
+        if (!string.IsNullOrEmpty(_myipUri))
+        {
+            try
+            {
+                var myIp = await _client.GetStringAsync(_myipUri);
+                _statistics.IP = myIp;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching IP: {ex.Message}");
+                _statistics.IP = "Unknown";
+            }
+        }
+
         var uri = new Uri(navigateUri);
         var hostname = uri.Host;
         var timestamp = DateTime.UtcNow;

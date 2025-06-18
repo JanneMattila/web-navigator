@@ -30,8 +30,9 @@ class Program
         var reportUri = configuration.GetValue<string>("reportUri", string.Empty);
         var reportInterval = configuration.GetValue<int>("reportInterval", -1);
         var reportLocation = configuration.GetValue<string>("reportLocation", string.Empty);
+        var myipUri = configuration.GetValue<string>("myipUri", "https://api.ipify.org");
 
-        var navigator = new Navigator(reportUri, reportInterval, reportLocation);
+        var navigator = new Navigator(reportUri, reportInterval, reportLocation, myipUri);
         await navigator.NavigateAsync(navigateUri);
     }
 }

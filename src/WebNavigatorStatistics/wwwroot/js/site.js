@@ -27,22 +27,25 @@ const addTableRow = (table, data) => {
         let machineNameCell = row.insertCell(1);
         machineNameCell.appendChild(document.createTextNode(data.machineName));
 
-        let timeCell = row.insertCell(2);
+        let ipCell = row.insertCell(2);
+        ipCell.appendChild(document.createTextNode(data.ipAddress));
+
+        let timeCell = row.insertCell(3);
         timeCell.appendChild(document.createTextNode(httpStat.time));
 
-        let statusCode2XXCell = row.insertCell(3);
+        let statusCode2XXCell = row.insertCell(4);
         statusCode2XXCell.appendChild(document.createTextNode(httpStat.statusCode2XX));
 
-        let statusCode3XXCell = row.insertCell(4);
+        let statusCode3XXCell = row.insertCell(5);
         statusCode3XXCell.appendChild(document.createTextNode(httpStat.statusCode3XX));
 
-        let statusCode4XXCell = row.insertCell(5);
+        let statusCode4XXCell = row.insertCell(6);
         statusCode4XXCell.appendChild(document.createTextNode(httpStat.statusCode4XX));
 
-        let statusCode5XXCell = row.insertCell(6);
+        let statusCode5XXCell = row.insertCell(7);
         statusCode5XXCell.appendChild(document.createTextNode(httpStat.statusCode5XX));
 
-        let lastUpdatedCell = row.insertCell(7);
+        let lastUpdatedCell = row.insertCell(8);
         lastUpdatedCell.appendChild(document.createTextNode(data.lastUpdated));
     }
 }
@@ -80,7 +83,7 @@ connection.on("UpdateStats", stats => {
     let totalsRow = statsTableElement.insertRow(-1);
 
     let totalsLabelCell = totalsRow.insertCell(0);
-    totalsLabelCell.colSpan = 3;
+    totalsLabelCell.colSpan = 4;
     totalsLabelCell.style.fontWeight = "bold";
     totalsLabelCell.appendChild(document.createTextNode("Totals"));
 

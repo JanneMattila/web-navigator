@@ -28,7 +28,7 @@ const addTableRow = (table, data) => {
         machineNameCell.appendChild(document.createTextNode(data.machineName));
 
         let ipCell = row.insertCell(2);
-        ipCell.appendChild(document.createTextNode(data.ipAddress));
+        ipCell.appendChild(document.createTextNode(data.ip));
 
         let timeCell = row.insertCell(3);
         timeCell.appendChild(document.createTextNode(httpStat.time));
